@@ -1,0 +1,498 @@
+/* === Shared: view shell, header, tabs === */
+
+.calendar-notes-view {
+	padding: var(--size-4-3);
+}
+
+.calendar-notes-header {
+	display: flex;
+	align-items: center;
+	gap: var(--size-4-2);
+	margin-bottom: var(--size-4-2);
+	flex-wrap: wrap;
+}
+
+.calendar-notes-month-label {
+	font-weight: 600;
+	font-size: var(--font-ui-large);
+	flex: 1;
+	text-align: center;
+	min-width: 8em;
+}
+
+.calendar-notes-nav-btn,
+.calendar-notes-today-btn {
+	cursor: pointer;
+}
+
+.calendar-notes-mode-tabs {
+	display: flex;
+	gap: 2px;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: var(--radius-s);
+	overflow: hidden;
+}
+
+.calendar-notes-mode-tab {
+	cursor: pointer;
+	padding: 2px 10px;
+	background: var(--background-secondary);
+	border: none;
+	color: var(--text-muted);
+}
+
+.calendar-notes-mode-tab.is-active {
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+}
+
+.calendar-notes-body {
+	overflow: auto;
+}
+
+.calendar-notes-add-btn {
+	opacity: 0;
+	cursor: pointer;
+	color: var(--text-muted);
+	padding: 0 var(--size-2-1);
+}
+
+.calendar-notes-cell:hover .calendar-notes-add-btn,
+.calendar-notes-agenda-day-header:hover .calendar-notes-add-btn {
+	opacity: 1;
+}
+
+/* === Chips (shared by all views) === */
+
+.calendar-notes-chip-list {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	margin-top: 2px;
+	overflow: hidden;
+}
+
+.calendar-notes-chip {
+	font-size: var(--font-ui-smaller);
+	color: #fff;
+	border-radius: var(--radius-s);
+	padding: 0 4px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.calendar-notes-chip-dense {
+	line-height: 1.5;
+}
+
+.calendar-notes-chip-span {
+	font-weight: 600;
+}
+
+.calendar-notes-chip-recurring {
+	cursor: default;
+	background-image: repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.25) 0 4px, transparent 4px 8px);
+}
+
+.calendar-notes-chip-complete .calendar-notes-chip-label {
+	text-decoration: line-through;
+	opacity: 0.7;
+}
+
+.calendar-notes-chip-checkbox {
+	margin: 0;
+	cursor: pointer;
+}
+
+.calendar-notes-chip-label {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.calendar-notes-chip-dragging {
+	opacity: 0.6;
+	outline: 2px dashed rgba(255, 255, 255, 0.8);
+}
+
+/* === Month view === */
+
+.calendar-notes-weekday-row {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	text-align: center;
+	font-size: var(--font-ui-smaller);
+	color: var(--text-muted);
+	margin-bottom: var(--size-2-1);
+}
+
+.calendar-notes-grid {
+	display: grid;
+	grid-template-columns: repeat(7, 1fr);
+	grid-template-rows: repeat(6, minmax(5em, 1fr));
+	gap: 1px;
+	background-color: var(--background-modifier-border);
+	border: 1px solid var(--background-modifier-border);
+}
+
+.calendar-notes-cell {
+	background-color: var(--background-primary);
+	padding: var(--size-2-1);
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	position: relative;
+}
+
+.calendar-notes-cell-outside {
+	color: var(--text-faint);
+	background-color: var(--background-secondary);
+}
+
+.calendar-notes-cell-today .calendar-notes-date {
+	background-color: var(--interactive-accent);
+	color: var(--text-on-accent);
+	border-radius: 50%;
+}
+
+.calendar-notes-cell-sunday .calendar-notes-date,
+.calendar-notes-cell-holiday .calendar-notes-date {
+	color: var(--text-error);
+}
+
+.calendar-notes-cell-saturday .calendar-notes-date {
+	color: var(--text-accent);
+}
+
+.calendar-notes-cell-drop-target {
+	outline: 2px dashed var(--interactive-accent);
+	outline-offset: -2px;
+}
+
+.calendar-notes-date-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.calendar-notes-date {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 1.6em;
+	height: 1.6em;
+	font-size: var(--font-ui-small);
+}
+
+.calendar-notes-holiday-label {
+	font-size: var(--font-ui-smaller);
+	color: var(--text-error);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.calendar-notes-dot-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 3px;
+	margin-top: 4px;
+}
+
+.calendar-notes-dot {
+	width: 6px;
+	height: 6px;
+	border-radius: 50%;
+	flex: 0 0 auto;
+}
+
+/* === Week view === */
+
+.calendar-notes-week-scroller {
+	overflow-x: auto;
+}
+
+.calendar-notes-week-header,
+.calendar-notes-week-allday-row {
+	display: flex;
+}
+
+.calendar-notes-week-axis-spacer {
+	flex: 0 0 3.5em;
+}
+
+.calendar-notes-week-day-label {
+	flex: 1;
+	min-width: 6em;
+	text-align: center;
+	padding: var(--size-2-1) 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.calendar-notes-week-day-number {
+	font-weight: 600;
+}
+
+.calendar-notes-week-allday-row {
+	min-height: 1.6em;
+	border-bottom: 1px solid var(--background-modifier-border);
+	margin-bottom: 4px;
+}
+
+.calendar-notes-week-allday-cell {
+	flex: 1;
+	min-width: 6em;
+	padding: 2px;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	border-left: 1px solid var(--background-modifier-border);
+}
+
+/* === Timeline (Week + Day) === */
+
+.calendar-notes-timeline-wrap {
+	display: flex;
+	position: relative;
+}
+
+.calendar-notes-time-axis {
+	flex: 0 0 3.5em;
+	position: relative;
+}
+
+.calendar-notes-time-axis-tick {
+	position: absolute;
+	left: 0;
+	right: 4px;
+	text-align: right;
+	font-size: var(--font-ui-smaller);
+	color: var(--text-muted);
+	transform: translateY(-0.5em);
+}
+
+.calendar-notes-timeline-grid {
+	flex: 1;
+	display: flex;
+	position: relative;
+	border-top: 1px solid var(--background-modifier-border);
+}
+
+.calendar-notes-timeline-day-col {
+	position: relative;
+	min-width: 6em;
+	border-left: 1px solid var(--background-modifier-border);
+}
+
+.calendar-notes-hour-line {
+	position: absolute;
+	left: 0;
+	right: 0;
+	border-top: 1px solid var(--background-modifier-border-hover, var(--background-modifier-border));
+	opacity: 0.5;
+}
+
+.calendar-notes-chip-timed {
+	position: absolute;
+	overflow: hidden;
+	align-items: flex-start;
+	box-sizing: border-box;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.calendar-notes-resize-handle {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 6px;
+	cursor: ns-resize;
+}
+
+.calendar-notes-chip-overflow {
+	background-color: var(--background-modifier-border) !important;
+	color: var(--text-normal);
+	justify-content: center;
+	font-weight: 600;
+}
+
+/* === Day view === */
+
+.calendar-notes-day-header {
+	display: flex;
+	align-items: baseline;
+	gap: var(--size-4-2);
+	margin-bottom: var(--size-2-1);
+}
+
+.calendar-notes-day-header-weekday {
+	color: var(--text-muted);
+}
+
+.calendar-notes-day-header-date {
+	font-weight: 600;
+	font-size: var(--font-ui-large);
+}
+
+.calendar-notes-day-allday-row {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-height: 1.6em;
+	border-bottom: 1px solid var(--background-modifier-border);
+	margin-bottom: 4px;
+	margin-left: 3.5em;
+}
+
+/* === Agenda view === */
+
+.calendar-notes-agenda-list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--size-4-2);
+}
+
+.calendar-notes-agenda-empty {
+	color: var(--text-muted);
+}
+
+.calendar-notes-agenda-day-header {
+	display: flex;
+	align-items: center;
+	gap: var(--size-2-1);
+	font-weight: 600;
+	margin-bottom: var(--size-2-1);
+}
+
+.calendar-notes-agenda-day-weekday {
+	font-weight: 400;
+	color: var(--text-muted);
+}
+
+.calendar-notes-agenda-row-list {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.calendar-notes-agenda-undated .calendar-notes-agenda-day-header {
+	color: var(--text-muted);
+}
+
+/* === Mobile day sheet === */
+
+.calendar-notes-day-sheet .modal-content {
+	padding: var(--size-4-3);
+}
+
+.calendar-notes-day-sheet-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: var(--size-4-2);
+}
+
+.calendar-notes-day-sheet-title {
+	font-weight: 600;
+	font-size: var(--font-ui-large);
+}
+
+.calendar-notes-day-sheet-add {
+	cursor: pointer;
+}
+
+.calendar-notes-day-sheet-list {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+/* === Mobile / narrow responsive (JS-driven classes, not raw media queries) === */
+
+.calendar-notes-view.calendar-notes-mobile .calendar-notes-mode-tab {
+	padding: 4px 8px;
+	font-size: var(--font-ui-smaller);
+}
+
+.calendar-notes-view.calendar-notes-narrow .calendar-notes-week-day-label,
+.calendar-notes-view.calendar-notes-narrow .calendar-notes-week-allday-cell,
+.calendar-notes-view.calendar-notes-narrow .calendar-notes-timeline-day-col {
+	min-width: 4.5em;
+}
+
+@media (max-width: 480px) {
+	.calendar-notes-view {
+		padding: var(--size-4-1);
+	}
+}
+
+/* === Settings: category rows === */
+
+.calendar-notes-category-row .setting-item-control {
+	flex-wrap: wrap;
+	gap: 4px;
+}
+
+/* === QuickAddModal: weekday picker === */
+
+.calendar-notes-dow-btn {
+	width: 2em;
+	height: 2em;
+	margin-left: 4px;
+	border-radius: var(--radius-s);
+	cursor: pointer;
+	background: var(--background-secondary);
+	border: 1px solid var(--background-modifier-border);
+}
+
+.calendar-notes-dow-btn.is-active {
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+}
+
+/* === Light-mode Notion-Calendar-style overrides (light mode only; dark mode keeps theme vars) === */
+
+.theme-light .calendar-notes-view {
+	--calendar-notes-bg: #ffffff;
+	--calendar-notes-border: #e9e9ea;
+	--calendar-notes-muted-bg: #fafafa;
+	background-color: var(--calendar-notes-bg);
+}
+
+.theme-light .calendar-notes-grid,
+.theme-light .calendar-notes-timeline-grid,
+.theme-light .calendar-notes-timeline-day-col,
+.theme-light .calendar-notes-week-allday-cell,
+.theme-light .calendar-notes-hour-line {
+	border-color: var(--calendar-notes-border);
+	background-color: var(--calendar-notes-bg);
+}
+
+.theme-light .calendar-notes-grid {
+	background-color: var(--calendar-notes-border);
+}
+
+.theme-light .calendar-notes-cell {
+	background-color: var(--calendar-notes-bg);
+}
+
+.theme-light .calendar-notes-cell-outside {
+	background-color: var(--calendar-notes-muted-bg);
+}
+
+.theme-light .calendar-notes-chip {
+	border-radius: 6px;
+	box-shadow: none;
+}
+
+.theme-light .calendar-notes-mode-tabs {
+	border-color: var(--calendar-notes-border);
+}
