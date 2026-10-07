@@ -1,7 +1,7 @@
 {
 	"id": "calendar-notes",
 	"name": "Calendar Notes",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"minAppVersion": "1.4.0",
 	"description": "Month/week/day/agenda calendar backed by one-note-per-event/task files, with category folders, drag-and-drop, recurring events, and Japanese holidays.",
 	"author": "ryuuta.k0926",
